@@ -40,6 +40,7 @@ public class TransactionController {
   @ApiResponses(value = {
       @ApiResponse(code = org.apache.http.HttpStatus.SC_CREATED, message = "Transaction created"),
       @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "validation failed"),
+      @ApiResponse(code = org.apache.http.HttpStatus.SC_NOT_FOUND, message = "not found")
   })
   public ResponseEntity<List<Transaction>> createNewTransaction(@ApiParam(value = "Transaction details", required = true) @RequestBody TransactionDTO transactionDTO) throws Exception {
     logger.info("Entering the new transaction saving handler");

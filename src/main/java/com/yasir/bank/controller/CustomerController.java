@@ -36,10 +36,11 @@ public class CustomerController {
   @ApiResponses(value = {
       @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "Retrieve all Customer details success"),
       @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "Retrieve all Customer details failed"),
+      @ApiResponse(code = org.apache.http.HttpStatus.SC_NOT_FOUND, message = "not found")
   })
   public ResponseEntity<List<CustomerDTO>> getCustomerDetails() {
     logger.info("Entering the customer detail retrieve handler");
     List<CustomerDTO> customer = customerService.getAllCustomers();
-    return new ResponseEntity<>(customer, HttpStatus.CREATED);
+    return new ResponseEntity<>(customer, HttpStatus.OK);
   }
 }

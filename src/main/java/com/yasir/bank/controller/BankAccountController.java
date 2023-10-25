@@ -40,6 +40,7 @@ public class BankAccountController {
   @ApiResponses(value = {
       @ApiResponse(code = org.apache.http.HttpStatus.SC_CREATED, message = "Bank Account created"),
       @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "validation failed"),
+      @ApiResponse(code = org.apache.http.HttpStatus.SC_NOT_FOUND, message = "not found")
   })
   public ResponseEntity<Account> createBankAccount(@ApiParam(value = "Bank Account details", required = true) @RequestBody BankAccountDTO bankAccountDTO) throws Exception {
     logger.info("Entering the bank account saving handler");
@@ -54,6 +55,7 @@ public class BankAccountController {
   @ApiResponses(value = {
       @ApiResponse(code = org.apache.http.HttpStatus.SC_OK, message = "Retrieve success"),
       @ApiResponse(code = org.apache.http.HttpStatus.SC_BAD_REQUEST, message = "Retrieve failed"),
+      @ApiResponse(code = org.apache.http.HttpStatus.SC_NOT_FOUND, message = "not found")
   })
   public ResponseEntity<BigDecimal> getBankBalance(
       @ApiParam(value = "AccountID", required = true)
