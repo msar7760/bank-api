@@ -1,0 +1,161 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_customer_table
+      author: Mahesh Sarathchandra
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: load_incentive_threshold
+      author: Mahesh Sarathchandra
+      changes:
+        - loadData:
+            tableName: customer
+            encoding: UTF-8
+            file: customer_info.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            usePreparedStatements: true
+            columns:
+              - column:
+                  name: first_name
+                  type: STRING
+              - column:
+                  name: last_name
+                  type: STRING
+  - changeSet:
+      id: create_Bank_Account_Table
+      author: Mahesh Sarathchandra
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_type
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: branch
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: country
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: bank
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: initial_deposit
+                  type: NUMERIC
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_balance
+                  type: NUMERIC
+                  constraints:
+                    nullable: true
+              - column:
+                  name: customer_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_id
+                    references: customer(id)
+              - column:
+                  name: saved_by
+                  type: VARCHAR(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: saved_time
+                  type: bigint
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create_transaction_Table
+      author: Mahesh Sarathchandra
+      changes:
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: transaction_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: transaction_amount
+                  type: NUMERIC
+                  constraints:
+                    nullable: true
+              - column:
+                  name: transaction_reference
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: transaction_type
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_account_id
+                    references: account(id)
+              - column:
+                  name: saved_by
+                  type: VARCHAR(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: saved_time
+                  type: bigint
+                  constraints:
+                    nullable: false
